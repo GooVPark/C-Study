@@ -8,6 +8,10 @@ using System.Threading.Tasks;
  * 날짜: 2022/06/02
  * 이름: 박성진
  * 내용: 연산자(Operator) 실습하기 교재 p90
+ * 
+ * 연산자(Operator)
+ * -변수에 저장된 데이터를 처리하기 위해 연산자를 사용
+ * -연산자는 크게 산술, 증가, 감소, 복합대입, 비교, 논리 연산자 등이 있다.
  */
 
 namespace Ch02
@@ -78,10 +82,6 @@ namespace Ch02
             Console.WriteLine($"r10: {r10}");
             Console.WriteLine($"r11: {r11}");
 
-            int result = TruckTest();
-
-            Console.WriteLine(result);
-
             //논리 연산자
             int num13 = 1;
             int num14 = 2;
@@ -101,57 +101,6 @@ namespace Ch02
             //조건 연산자
             int num15 = 1;
             string r17 = (num15 > 1) ? "num15는 1보다 크다." : "num15는 1보다 크지 않다.";
-        }
-
-        static int TruckTest()
-        {
-            int bridge_length = 100;
-            int weight = 100;
-            int[] truck_weights = { 10, 10, 10, 10, 10, 10, 10, 10, 10, 10 };
-            
-            int totalWeight = 0;
-            int time = 0;
-            int[] empty = new int[bridge_length];
-            var bridge = new Queue<int>(empty);
-            var trucks = new Queue<int>(truck_weights);
-
-            while (bridge.Count > 0)
-            {
-                time++;
-                int front = bridge.Dequeue();
-                totalWeight -= front;
-
-                if (trucks.Count != 0)
-                {
-                    int truck = trucks.Peek();
-
-                    if (weight > totalWeight + truck)
-                    {
-                        trucks.Dequeue();
-                        totalWeight += truck;
-                        bridge.Enqueue(truck);
-                    }
-                    else
-                    {
-                        bridge.Enqueue(0);
-                    }
-                }
-                Console.Write("Bridge: [");
-                foreach(int truck in bridge)
-                {
-                    Console.Write($" {truck} ");
-                }
-                Console.Write("]");
-                Console.Write("  Truck Queue: [");
-                foreach (int truck in trucks)
-                {
-                    Console.Write($" {truck} ");
-                }
-                Console.Write("]");
-                Console.Write($"  Total Weight: {totalWeight}\n");
-            }
-
-            return time;
         }
     }
     
